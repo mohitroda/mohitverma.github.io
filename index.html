@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohit Verma — Senior Data Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+```
+:root {
+  --bg:        #0a0e1a;
+  --bg2:       #0f1524;
+  --bg3:       #141b2d;
+  --surface:   #1a2235;
+  --surface2:  #1f2a40;
+  --border:    #2a3550;
+  --border2:   #334060;
+  --text:      #e2e8f5;
+  --muted:     #8896b3;
+  --dim:       #55637a;
+  --cyan:      #00d4ff;
+  --cyan-dim:  rgba(0,212,255,0.10);
+  --cyan-glow: rgba(0,212,255,0.22);
+  --green:     #00e87a;
+  --green-dim: rgba(0,232,122,0.1);
+  --orange:    #ff8c42;
+  --purple:    #a78bfa;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 4rem;
+  background: rgba(10,14,26,0.90);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem; font-weight: 700;
+  color: var(--cyan); text-decoration: none; letter-spacing: 0.04em;
+}
+.nav-logo span { color: var(--dim); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; color: var(--muted); text-decoration: none;
+  letter-spacing: 0.1em; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--cyan); }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  padding: 9rem 4rem 5rem;
+  gap: 5rem;
+  position: relative; overflow: hidden;
+}
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(110px); pointer-events: none; z-index: 0;
+}
+.orb1 { width: 520px; height: 520px; background: rgba(0,212,255,0.055); top: -80px; right: -80px; }
+.orb2 { width: 320px; height: 320px; background: rgba(167,139,250,0.04); bottom: 80px; left: -60px; }
+
+.hero-content { position: relative; z-index: 1; }
+
+
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(3rem, 5.5vw, 5.2rem);
+  font-weight: 800; line-height: 1.0; letter-spacing: -0.025em;
+  margin-bottom: 0.4rem;
+  opacity: 0; animation: fadeUp 0.7s 0.25s forwards;
+}
+h1 .accent { color: var(--cyan); }
+.hero-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem; color: var(--muted); margin-bottom: 1.8rem;
+  opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
+}
+.hero-role .hl { color: var(--orange); }
+.hero-desc {
+  font-size: 1rem; color: var(--muted); line-height: 1.85;
+  max-width: 500px; margin-bottom: 2.4rem;
+  opacity: 0; animation: fadeUp 0.7s 0.55s forwards;
+}
+.hero-desc strong { color: var(--text); font-weight: 600; }
+.hero-ctas {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.7s 0.7s forwards;
+}
+.btn-p {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--cyan); color: var(--bg);
+  padding: 0.78rem 1.7rem; font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.07em; text-transform: uppercase; text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.btn-p:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 0 28px var(--cyan-glow); }
+.btn-s {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  border: 1px solid var(--border2); color: var(--text);
+  padding: 0.78rem 1.7rem; font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase; text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+.btn-s:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px); }
+
+/* Hero panel */
+.hero-panel {
+  position: relative; z-index: 1;
+  background: var(--surface); border: 1px solid var(--border);
+  overflow: hidden;
+  opacity: 0; animation: fadeUp 0.7s 0.85s forwards;
+}
+.panel-bar {
+  display: flex; align-items: center; gap: 0.45rem;
+  background: var(--bg3); padding: 0.7rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+}
+.pdot { width: 10px; height: 10px; border-radius: 50%; }
+.pr { background: #ff5f57; } .py { background: #febc2e; } .pg { background: #28c840; }
+.pfile { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; color: var(--cyan); }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.sc {
+  padding: 1.6rem 1.4rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.sc:nth-child(2n) { border-right: none; }
+.sc:nth-child(3), .sc:nth-child(4) { border-bottom: none; }
+.sc:hover { background: var(--surface2); }
+.sc-key { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--dim); margin-bottom: 0.45rem; letter-spacing: 0.08em; }
+.sc-val { font-family: 'Syne', sans-serif; font-size: 2.6rem; font-weight: 800; line-height: 1; color: var(--cyan); }
+.sc-val.g { color: var(--green); }
+.sc-val.o { color: var(--orange); }
+.sc-val.p { color: var(--purple); }
+.sc-desc { font-size: 0.74rem; color: var(--muted); margin-top: 0.3rem; }
+
+/* SECTIONS */
+section { padding: 6rem 4rem; position: relative; z-index: 1; }
+section.alt { background: var(--bg2); }
+
+.sec-head { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 3.5rem; }
+.sec-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.63rem; color: var(--cyan); letter-spacing: 0.15em;
+  background: var(--cyan-dim); border: 1px solid rgba(0,212,255,0.18);
+  padding: 0.28rem 0.65rem; white-space: nowrap;
+}
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;
+}
+.sec-line { flex: 1; height: 1px; background: var(--border); }
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 4rem; align-items: start; }
+.about-text p { color: var(--muted); margin-bottom: 1.1rem; font-size: 1rem; line-height: 1.85; }
+.about-text p strong { color: var(--text); font-weight: 600; }
+.stack-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--dim); letter-spacing: 0.15em; margin: 1.8rem 0 0.7rem; }
+.tech-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.ttag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+  color: var(--cyan); background: var(--cyan-dim);
+  border: 1px solid rgba(0,212,255,0.15);
+  padding: 0.25rem 0.75rem; transition: background 0.2s, border-color 0.2s;
+}
+.ttag:hover { background: rgba(0,212,255,0.18); border-color: var(--cyan); }
+.info-stack { display: flex; flex-direction: column; }
+.iitem {
+  padding: 1.1rem 1.4rem; background: var(--surface);
+  border: 1px solid var(--border); border-bottom: none;
+  transition: background 0.2s;
+}
+.iitem:last-child { border-bottom: 1px solid var(--border); }
+.iitem:hover { background: var(--surface2); }
+.ikey { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--cyan); letter-spacing: 0.12em; margin-bottom: 0.2rem; }
+.ival { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+
+/* SKILLS */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.sg {
+  background: var(--bg); padding: 1.8rem;
+  transition: background 0.2s;
+}
+.sg:hover { background: var(--surface); }
+.sg-hd { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.1rem; }
+.sg-icon {
+  width: 30px; height: 30px; background: var(--surface2); border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+}
+.sg-title { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 700; color: var(--text); letter-spacing: 0.06em; text-transform: uppercase; }
+.stags { display: flex; flex-wrap: wrap; gap: 0.38rem; }
+.stag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+  color: var(--muted); background: var(--surface2); border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+}
+
+/* EXPERIENCE */
+.exp-wrap { display: grid; grid-template-columns: 210px 1fr; gap: 0; border: 1px solid var(--border); }
+.exp-nav { border-right: 1px solid var(--border); }
+.en {
+  padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border);
+  cursor: pointer; border-left: 2px solid transparent;
+  transition: background 0.2s;
+}
+.en:last-child { border-bottom: none; }
+.en:hover { background: var(--surface); }
+.en.active { background: var(--surface); border-left-color: var(--cyan); }
+.en-yr { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--dim); margin-bottom: 0.2rem; }
+.en-title { font-size: 0.82rem; font-weight: 700; color: var(--text); }
+.en.active .en-title { color: var(--cyan); }
+
+.exp-body { padding: 2.5rem; }
+.ep { display: none; }
+.ep.active { display: block; }
+.ep-title { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem; }
+.ep-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.8rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; }
+.ep-co { color: var(--cyan); }
+.ep-loc { color: var(--dim); }
+.ep-per { color: var(--orange); }
+.ep-bullets { list-style: none; }
+.ep-bullets li {
+  display: flex; gap: 0.8rem; align-items: flex-start;
+  padding: 0.65rem 0; border-bottom: 1px solid var(--border);
+  font-size: 0.91rem; color: var(--muted); line-height: 1.7;
+}
+.ep-bullets li:last-child { border-bottom: none; }
+.ep-bullets li::before { content: '▸'; color: var(--cyan); flex-shrink: 0; margin-top: 0.05rem; }
+.ep-bullets li strong { color: var(--green); font-weight: 600; }
+
+/* IMPACT */
+.impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 3.5rem; }
+.ic {
+  background: var(--bg); padding: 2.2rem 2rem;
+  position: relative; overflow: hidden; transition: background 0.2s;
+}
+.ic:hover { background: var(--surface); }
+.ic::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 100%;
+  background: var(--cyan); opacity: 0; transition: opacity 0.3s;
+}
+.ic:hover::before { opacity: 1; }
+.ic-metric { font-family: 'Syne', sans-serif; font-size: 3.2rem; font-weight: 800; line-height: 1; color: var(--cyan); margin-bottom: 0.45rem; }
+.ic-metric.g { color: var(--green); }
+.ic-metric.o { color: var(--orange); }
+.ic-metric.p { color: var(--purple); }
+.ic-title { font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+.ic-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.7; }
+
+/* CERTS */
+.certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 3rem; }
+.cc {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 1.2rem 1.4rem; display: flex; gap: 1rem; align-items: center;
+  transition: border-color 0.2s, background 0.2s;
+}
+.cc:hover { border-color: var(--cyan); background: var(--surface2); }
+.cc-icon { width: 36px; height: 36px; background: var(--bg3); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 1.05rem; flex-shrink: 0; }
+.cc-name { font-size: 0.83rem; font-weight: 600; color: var(--text); line-height: 1.35; }
+.cc-org { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--cyan); margin-top: 0.2rem; }
+
+/* AWARDS */
+.awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.aw {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 1.2rem 1.3rem; transition: border-color 0.2s, background 0.2s;
+}
+.aw:hover { border-color: var(--orange); background: var(--surface2); }
+.aw-star { color: var(--orange); font-size: 0.85rem; margin-bottom: 0.45rem; }
+.aw-name { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+.aw-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--dim); }
+
+/* CONTACT */
+#contact { text-align: center; }
+#contact h2 { margin-bottom: 0.8rem; }
+.contact-sub { color: var(--muted); font-size: 0.97rem; margin-bottom: 2.8rem; }
+.contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+.cl {
+  display: flex; align-items: center; gap: 0.65rem;
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text); text-decoration: none;
+  padding: 0.85rem 1.6rem; font-size: 0.82rem; font-weight: 600;
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.cl:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 20px var(--cyan-dim); }
+
+footer {
+  text-align: center; padding: 1.4rem;
+  background: var(--bg); border-top: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--dim); font-size: 0.66rem; letter-spacing: 0.1em;
+}
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s, transform 0.6s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(14px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  #hero { grid-template-columns: 1fr; padding: 7rem 2rem 4rem; gap: 3rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .exp-wrap { grid-template-columns: 1fr; }
+  .exp-nav { border-right: none; border-bottom: 1px solid var(--border); display: flex; overflow-x: auto; }
+  .en { border-bottom: none; border-right: 1px solid var(--border); border-left: none; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; }
+  .en.active { border-left: none; border-bottom-color: var(--cyan); background: var(--surface); }
+  .exp-body { padding: 2rem 1.5rem; }
+  section { padding: 4rem 2rem; }
+  nav { padding: 1rem 1.5rem; }
+}
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  h1 { font-size: 2.6rem; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .sc { border-right: 1px solid var(--border) !important; border-bottom: 1px solid var(--border) !important; }
+}
+```
+
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#hero">mohit<span>@verma</span> <span style="color:var(--cyan)">~</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">stack</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#impact">impact</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+
+<section id="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+
+  <div class="hero-content">
+    <h1>Mohit<br /><span class="accent">Verma</span></h1>
+    <div class="hero-role">Senior Data Engineer &nbsp;·&nbsp; <span class="hl">SnowPro Core Certified</span></div>
+    <p class="hero-desc">
+      Building <strong>cloud-native data pipelines</strong> and leading enterprise Snowflake & AWS
+      migrations with 6+ years of experience. Trusted by <strong>Fortune 500 clients</strong> for
+      performance, reliability, and scale.
+    </p>
+    <div class="hero-ctas">
+      <a href="#experience" class="btn-p">↓ &nbsp;Experience</a>
+      <a href="#contact" class="btn-s">Contact →</a>
+    </div>
+  </div>
+
+  <div class="hero-panel reveal">
+    <div class="panel-bar">
+      <div class="pdot pr"></div>
+      <div class="pdot py"></div>
+      <div class="pdot pg"></div>
+      <span class="pfile">impact_metrics.json</span>
+    </div>
+    <div class="stats-grid">
+      <div class="sc">
+        <div class="sc-key">// years_exp</div>
+        <div class="sc-val">6+</div>
+        <div class="sc-desc">Years in data engineering</div>
+      </div>
+      <div class="sc">
+        <div class="sc-key">// cost_saved</div>
+        <div class="sc-val g">35%</div>
+        <div class="sc-desc">Compute cost reduction</div>
+      </div>
+      <div class="sc">
+        <div class="sc-key">// speed_gain</div>
+        <div class="sc-val o">3x</div>
+        <div class="sc-desc">Faster data processing</div>
+      </div>
+      <div class="sc">
+        <div class="sc-key">// uptime</div>
+        <div class="sc-val p">99.9%</div>
+        <div class="sc-desc">Pipeline reliability</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+
+<section id="about" class="alt">
+  <div class="sec-head reveal">
+    <span class="sec-tag">01 // about</span>
+    <h2>Who I Am</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a <strong>Senior Data Engineer</strong> based in Manchester, CT — I design and build cloud data systems that are fast, reliable, and cost-efficient at enterprise scale.</p>
+      <p>At <strong>Capgemini</strong>, I've led large-scale <strong>Snowflake and AWS migrations</strong>, built ELT frameworks processing 10TB+ datasets, and established GDPR & SOC2 compliant governance frameworks — all while managing cross-functional teams across multiple time zones.</p>
+      <p>I thrive where engineering rigor meets business impact. Whether it's a 99.9% uptime pipeline or a reusable Python library that saves the team 15 hours a week, I ship things that matter.</p>
+      <div class="stack-label">// core_stack</div>
+      <div class="tech-tags">
+        <span class="ttag">Snowflake</span><span class="ttag">AWS</span>
+        <span class="ttag">Python</span><span class="ttag">PySpark</span>
+        <span class="ttag">Airflow</span><span class="ttag">DBT</span>
+        <span class="ttag">Kafka</span><span class="ttag">Terraform</span>
+        <span class="ttag">Docker</span><span class="ttag">Informatica IDMC</span>
+      </div>
+    </div>
+    <div class="info-stack reveal">
+      <div class="iitem"><div class="ikey">location</div><div class="ival">Manchester, CT · USA</div></div>
+      <div class="iitem"><div class="ikey">current_role</div><div class="ival">Senior Consultant @ Capgemini</div></div>
+      <div class="iitem"><div class="ikey">education</div><div class="ival">B.Tech, NIT Jalandhar</div></div>
+      <div class="iitem"><div class="ikey">certification</div><div class="ival">❄️ SnowPro Core Certified</div></div>
+      <div class="iitem"><div class="ikey">email</div><div class="ival" style="font-size:0.8rem"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bcd1d3d4d5c8ced3d8ddfcdbd1ddd5d092dfd3d1">[email&#160;protected]</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+
+<section id="skills">
+  <div class="sec-head reveal">
+    <span class="sec-tag">02 // stack</span>
+    <h2>Technical Skills</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="sg">
+      <div class="sg-hd"><div class="sg-icon">☁️</div><div class="sg-title">Cloud Platforms</div></div>
+      <div class="stags"><span class="stag">AWS S3</span><span class="stag">Lambda</span><span class="stag">Glue</span><span class="stag">EMR</span><span class="stag">Redshift</span><span class="stag">Athena</span><span class="stag">CloudWatch</span><span class="stag">Snowflake</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-hd"><div class="sg-icon">🐍</div><div class="sg-title">Languages</div></div>
+      <div class="stags"><span class="stag">Python</span><span class="stag">SQL</span><span class="stag">PySpark</span><span class="stag">Shell Script</span><span class="stag">Unix/Linux</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-hd"><div class="sg-icon">⚙️</div><div class="sg-title">Data Engineering</div></div>
+      <div class="stags"><span class="stag">Informatica IDMC</span><span class="stag">Apache Spark</span><span class="stag">Airflow</span><span class="stag">Kafka</span><span class="stag">DBT</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-hd"><div class="sg-icon">🗄️</div><div class="sg-title">Databases</div></div>
+      <div class="stags"><span class="stag">Snowflake</span><span class="stag">Oracle</span><span class="stag">PostgreSQL</span><span class="stag">MySQL</span><span class="stag">Redshift</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-hd"><div class="sg-icon">🚀</div><div class="sg-title">DevOps & CI/CD</div></div>
+      <div class="stags"><span class="stag">Git</span><span class="stag">Jenkins</span><span class="stag">Docker</span><span class="stag">Terraform</span><span class="stag">CloudFormation</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-hd"><div class="sg-icon">🏗️</div><div class="sg-title">Architecture</div></div>
+      <div class="stags"><span class="stag">Star Schema</span><span class="stag">Data Vault 2.0</span><span class="stag">DataOps</span><span class="stag">Agile/Scrum</span><span class="stag">Data Governance</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+
+<section id="experience" class="alt">
+  <div class="sec-head reveal">
+    <span class="sec-tag">03 // experience</span>
+    <h2>Career Timeline</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="exp-wrap reveal">
+    <div class="exp-nav">
+      <div class="en active" onclick="switchExp(this,'e1')">
+        <div class="en-yr">APR 2025 – PRESENT</div>
+        <div class="en-title">Senior Consultant</div>
+      </div>
+      <div class="en" onclick="switchExp(this,'e2')">
+        <div class="en-yr">NOV 2023 – APR 2025</div>
+        <div class="en-title">Consultant (US)</div>
+      </div>
+      <div class="en" onclick="switchExp(this,'e3')">
+        <div class="en-yr">APR 2022 – NOV 2023</div>
+        <div class="en-title">Consultant (India)</div>
+      </div>
+      <div class="en" onclick="switchExp(this,'e4')">
+        <div class="en-yr">OCT 2020 – APR 2022</div>
+        <div class="en-title">Assoc. Consultant</div>
+      </div>
+      <div class="en" onclick="switchExp(this,'e5')">
+        <div class="en-yr">JUL 2019 – OCT 2020</div>
+        <div class="en-title">Senior Analyst</div>
+      </div>
+    </div>
+    <div class="exp-body">
+      <div class="ep active" id="e1">
+        <div class="ep-title">Senior Consultant</div>
+        <div class="ep-meta">
+          <span class="ep-co">Capgemini</span>
+          <span class="ep-loc">📍 Manchester, CT</span>
+          <span class="ep-per">Apr 2025 – Present</span>
+        </div>
+        <ul class="ep-bullets">
+          <li>Architected near real-time data ingestion pipelines with <strong>99.9% uptime</strong>, supporting analytics for 50+ business units across Fortune 500 clients.</li>
+          <li>Built ELT frameworks using Informatica IDMC & Snowflake, reducing data latency by <strong>40%</strong>.</li>
+          <li>Migrated 100+ legacy Oracle views to Snowflake, cutting compute costs by <strong>35%</strong> and boosting query performance by <strong>2.5x</strong>.</li>
+          <li>Led cloud migration of 20+ mission-critical apps to Snowflake, accelerating processing by <strong>3x</strong>.</li>
+          <li>Designed data quality frameworks with automated validation, reducing discrepancies by <strong>60%</strong>.</li>
+          <li>Mentored junior engineers on cloud architecture, Python, and Snowflake optimisation.</li>
+        </ul>
+      </div>
+      <div class="ep" id="e2">
+        <div class="ep-title">Consultant</div>
+        <div class="ep-meta">
+          <span class="ep-co">Capgemini</span>
+          <span class="ep-loc">📍 United States</span>
+          <span class="ep-per">Nov 2023 – Apr 2025</span>
+        </div>
+        <ul class="ep-bullets">
+          <li>Primary Onsite Consultant managing end-to-end data lifecycle for global clients, coordinating 15+ offshore developers with U.S. stakeholders.</li>
+          <li>Spearheaded AWS migrations improving data accessibility by <strong>50%</strong>.</li>
+          <li>Designed scalable cloud solutions enabling real-time analytics and BI for executive leadership.</li>
+          <li>Established GDPR & SOC2 compliant data governance policies across multiple environments.</li>
+          <li>Led workshops on AWS best practices, Snowflake optimisation, and modern data architecture.</li>
+        </ul>
+      </div>
+      <div class="ep" id="e3">
+        <div class="ep-title">Consultant</div>
+        <div class="ep-meta">
+          <span class="ep-co">Capgemini</span>
+          <span class="ep-loc">📍 India</span>
+          <span class="ep-per">Apr 2022 – Nov 2023</span>
+        </div>
+        <ul class="ep-bullets">
+          <li>Developed PySpark scripts processing <strong>10TB+ datasets</strong>, reducing manual handling by 60%.</li>
+          <li>Orchestrated workflows via AWS Glue, Lambda, S3, EMR — achieving <strong>99.9% reliability</strong> for 15+ apps.</li>
+          <li>Built reusable Python libraries, reducing new project dev time by <strong>40%</strong>.</li>
+          <li>Optimised ML feature pipelines, cutting generation time from hours to minutes.</li>
+        </ul>
+      </div>
+      <div class="ep" id="e4">
+        <div class="ep-title">Associate Consultant</div>
+        <div class="ep-meta">
+          <span class="ep-co">Capgemini</span>
+          <span class="ep-loc">📍 Mumbai, India</span>
+          <span class="ep-per">Oct 2020 – Apr 2022</span>
+        </div>
+        <ul class="ep-bullets">
+          <li>Engineered Python ETL framework reducing weekly processing by <strong>15+ hours (75% improvement)</strong>.</li>
+          <li>Offshore SPOC maintaining <strong>100% on-time delivery</strong> across multiple time zones.</li>
+          <li>Implemented CI/CD with Jenkins & Git, reducing deployment time by <strong>50%</strong>.</li>
+          <li>Optimised SQL queries, cutting report generation time by <strong>45%</strong>.</li>
+        </ul>
+      </div>
+      <div class="ep" id="e5">
+        <div class="ep-title">Senior Analyst</div>
+        <div class="ep-meta">
+          <span class="ep-co">Capgemini</span>
+          <span class="ep-loc">📍 Pune, India</span>
+          <span class="ep-per">Jul 2019 – Oct 2020</span>
+        </div>
+        <ul class="ep-bullets">
+          <li>Wrote SQL & Python scripts for deep-dive analysis, improving data accuracy by <strong>25%</strong>.</li>
+          <li>Collaborated across 4 continents on 10+ data integration projects.</li>
+          <li>Built dashboards (Matplotlib, Seaborn) to communicate insights to non-technical stakeholders.</li>
+          <li>Root cause analysis reducing recurring data issues by <strong>70%</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+
+<section id="impact">
+  <div class="sec-head reveal">
+    <span class="sec-tag">04 // impact</span>
+    <h2>Impact by Numbers</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="impact-grid reveal">
+    <div class="ic"><div class="ic-metric">35%</div><div class="ic-title">Compute Cost Reduction</div><div class="ic-desc">Migrated 100+ Oracle views to Snowflake cloud-native architecture for Fortune 500 clients.</div></div>
+    <div class="ic"><div class="ic-metric g">3x</div><div class="ic-title">Faster Processing</div><div class="ic-desc">Led Snowflake migrations of 20+ critical apps with automated incremental loading.</div></div>
+    <div class="ic"><div class="ic-metric o">99.9%</div><div class="ic-title">Pipeline Uptime</div><div class="ic-desc">Real-time ingestion pipelines serving 50+ business units with near-zero downtime.</div></div>
+    <div class="ic"><div class="ic-metric p">60%</div><div class="ic-title">Fewer Discrepancies</div><div class="ic-desc">Automated validation frameworks dramatically improved trust in analytics outputs.</div></div>
+    <div class="ic"><div class="ic-metric">10TB+</div><div class="ic-title">Data via PySpark</div><div class="ic-desc">High-performance PySpark pipelines with automated quality checks across enterprise sources.</div></div>
+    <div class="ic"><div class="ic-metric g">75%</div><div class="ic-title">ETL Time Saved</div><div class="ic-desc">Custom Python ETL eliminated 15+ hours of weekly manual processing entirely.</div></div>
+  </div>
+
+  <div class="sec-head reveal" style="margin-bottom:1.8rem;">
+    <span class="sec-tag">// certifications</span>
+    <div class="sec-line"></div>
+  </div>
+  <div class="certs-grid reveal">
+    <div class="cc"><div class="cc-icon">❄️</div><div><div class="cc-name">SnowPro Core Certification</div><div class="cc-org">Snowflake</div></div></div>
+    <div class="cc"><div class="cc-icon">📊</div><div><div class="cc-name">Google Data Analytics Professional</div><div class="cc-org">Google</div></div></div>
+    <div class="cc"><div class="cc-icon">📈</div><div><div class="cc-name">Data Visualization with Python</div><div class="cc-org">IBM / Coursera</div></div></div>
+    <div class="cc"><div class="cc-icon">🔄</div><div><div class="cc-name">Agile Software Development</div><div class="cc-org">Professional Certification</div></div></div>
+  </div>
+
+  <div class="sec-head reveal" style="margin-bottom:1.8rem; margin-top:0.5rem;">
+    <span class="sec-tag">// awards</span>
+    <div class="sec-line"></div>
+  </div>
+  <div class="awards-grid reveal">
+    <div class="aw"><div class="aw-star">★</div><div class="aw-name">Customer Delight Award</div><div class="aw-sub">Q3 2022 · Q1 2021 — Capgemini</div></div>
+    <div class="aw"><div class="aw-star">★</div><div class="aw-name">Star of the Month</div><div class="aw-sub">Q4 2020 — Capgemini</div></div>
+    <div class="aw"><div class="aw-star">★</div><div class="aw-name">Rising Star Award</div><div class="aw-sub">Q3 2020 — Capgemini</div></div>
+    <div class="aw"><div class="aw-star">★</div><div class="aw-name">Best Firer Award</div><div class="aw-sub">Technical Excellence — Capgemini</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact" class="alt">
+  <div class="sec-head reveal" style="justify-content:center; flex-direction:column; gap:0.8rem; text-align:center;">
+    <span class="sec-tag">05 // contact</span>
+    <h2>Let's Build Something</h2>
+  </div>
+  <p class="contact-sub reveal">Let's connect and discuss data, cloud architecture, or collaboration.</p>
+  <div class="contact-links reveal">
+    <a href="/cdn-cgi/l/email-protection#a4c9cbcccdd0d6cbc0c5e4c3c9c5cdc88ac7cbc9" class="cl">✉️ &nbsp;<span class="__cf_email__" data-cfemail="bcd1d3d4d5c8ced3d8ddfcdbd1ddd5d092dfd3d1">[email&#160;protected]</span></a>
+    <a href="tel:+19597771086" class="cl">📱 &nbsp;+1 959 777 1086</a>
+    <a href="https://linkedin.com/in/mohit-verma" target="_blank" class="cl">💼 &nbsp;LinkedIn</a>
+    <a href="https://github.com" target="_blank" class="cl">🐙 &nbsp;GitHub</a>
+  </div>
+</section>
+
+<footer>&gt;_ mohit_verma.init() · manchester, ct · © 2025</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+function switchExp(el, id) {
+document.querySelectorAll(’.en’).forEach(n => n.classList.remove(‘active’));
+document.querySelectorAll(’.ep’).forEach(p => p.classList.remove(‘active’));
+el.classList.add(‘active’);
+document.getElementById(id).classList.add(‘active’
